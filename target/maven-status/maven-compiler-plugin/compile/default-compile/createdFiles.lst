@@ -1,6 +1,7 @@
 com/reecesmith/guestbook/domain/GuestBookEntryRepository.class
 com/reecesmith/guestbook/controller/GuestBookController.class
+com/reecesmith/guestbook/AuditConfig.class
+com/reecesmith/guestbook/GuestbookApplication.class
 com/reecesmith/guestbook/domain/GuestBookEntry.class
 com/reecesmith/guestbook/service/GuestBookService.class
-com/reecesmith/guestbook/GuestbookApplication.class
 com/reecesmith/guestbook/controller/GuestBookWebController.class

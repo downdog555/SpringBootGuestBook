@@ -13,11 +13,13 @@
 </div>
 <table>
     <tr>
-        <th>User</th><th>Comment</th>
+        <th>User</th><th>Comment</th><th>Created:</th><th>Modified</th>
     </tr>
     <tr th:each="entry: ${entries}">
         <td th:text="${entry.user}"></td>
         <td th:text="${entry.comment}"></td>
+        <td th:text="${entry.created}"></td>
+        <td th:text="${entry.modified}"></td>
         <td><a th:href="@{'/delete/' + ${entry.id}}">Delete</a></td>
         <td><a th:href="@{'/update/' + ${entry.id}}">Update</a></td>
     </tr>

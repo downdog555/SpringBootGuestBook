@@ -3,7 +3,9 @@ package com.reecesmith.guestbook.controller;
 import com.reecesmith.guestbook.domain.GuestBookEntry;
 import com.reecesmith.guestbook.service.GuestBookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.List;
 
@@ -22,9 +24,19 @@ public class GuestBookController {
     }
 
     @DeleteMapping("/comment/{id}")
-    public void deleteGuestBookEntryById(@PathVariable("id") Integer id)
+    public ResponseEntity<Void> deleteGuestBookEntryById(@PathVariable("id") Integer id)
     {
-        this.guestBookService.deleteGuestBookEntryById(id);
+        try
+        {
+            this.guestBookService.deleteGuestBookEntryById(id);
+            return ResponseEntity.ok().build();
+        }
+        catch (ResourceAccessException e)
+        {
+            return ResponseEntity.notFound().build();
+        }
+
+
     }
 
     @PostMapping("/add")

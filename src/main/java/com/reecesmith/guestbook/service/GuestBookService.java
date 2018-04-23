@@ -34,7 +34,38 @@ public class GuestBookService
     }
 
     public void save (GuestBookEntry newEntry)
+
     {
+       String comment = newEntry.getComment();
+       char[] com = comment.toCharArray();
+        for (int i =0; i< com.length;i++)
+        {
+            switch (com[i])
+            {
+                case '{':
+                    com[i] = '*';
+                    break;
+
+                case '}':
+                    com[i] = '*';
+                    break;
+                case ';':
+                    com[i] = '*';
+                    break;
+                case '<':
+                    com[i] = '*';
+                    break;
+                case '>':
+                    com[i] = '*';
+                    break;
+            }
+        }
+        //comment = com.toString();
+
+
+         comment = String.copyValueOf(com);
+        newEntry.setComment(comment);
+
         this.guestBookEntryRepository.save(newEntry);
     }
 

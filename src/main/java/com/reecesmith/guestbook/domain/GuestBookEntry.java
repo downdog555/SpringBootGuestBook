@@ -1,14 +1,30 @@
 package com.reecesmith.guestbook.domain;
 
+
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime.*;
+import java.time.LocalDateTime;
+import java.util.Date;
+import javax.validation.constraints.NotNull;
 
 import javax.validation.constraints.NotEmpty;
 
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table (name = "entries")
 public class GuestBookEntry
 {
+
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +37,20 @@ public class GuestBookEntry
     @NotEmpty
     private String comment;
 
+
+    @CreatedDate
+    private LocalDateTime created;
+
+    @LastModifiedDate
+    private LocalDateTime modified;
+
     public GuestBookEntry()
     {
+    }
+
+    public GuestBookEntry(@NotEmpty String user, @NotEmpty String comment) {
+        this.user = user;
+        this.comment = comment;
     }
 
     @Override
@@ -31,6 +59,8 @@ public class GuestBookEntry
                 "id=" + id +
                 ", user='" + user + '\'' +
                 ", comment='" + comment + '\'' +
+                ", created=" + created +
+                ", modified=" + modified +
                 '}';
     }
 
@@ -58,11 +88,19 @@ public class GuestBookEntry
         this.comment = comment;
     }
 
-    public GuestBookEntry(@NotEmpty String user, @NotEmpty String comment) {
-
-        this.user = user;
-        this.comment = comment;
+    public LocalDateTime getCreated() {
+        return created;
     }
 
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
 
+    public LocalDateTime getModified() {
+        return modified;
+    }
+
+    public void setModified(LocalDateTime modified) {
+        this.modified = modified;
+    }
 }

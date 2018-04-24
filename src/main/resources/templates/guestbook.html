@@ -7,13 +7,23 @@
 </head>
 <body>
 <h1>Hello, world</h1>
+<a href="/">Back</a>
+
+<form th:object="${value}" th:action="@{'/search'}"  method="get">
+    <label>Search: </label>
+    <input type="text" size="64" th:field="*{searchValue}" />
+    <input type="submit" value="Submit" />
+
+    <p class="warning" th:if="${#fields.hasErrors('searchValue')}">User cannot be empty.</p>
+</form>
+
 
 <div th:if="${entries.isEmpty()}">
     <p>There are no comments in the Guestbook. What a pity.</p>
 </div>
 <table>
     <tr>
-        <th>User</th><th>Comment</th><th>Created:</th><th>Modified</th>
+        <th>User</th><th>Comment</th><th>Created</th><th>Modified</th><th>Delete</th><th>Update</th>
     </tr>
     <tr th:each="entry: ${entries}">
         <td th:text="${entry.user}"></td>

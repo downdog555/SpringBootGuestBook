@@ -1,4 +1,6 @@
 /home/reece/IdeaProjects/guestbook-spring/src/main/java/com/reecesmith/guestbook/domain/GuestBookEntryRepository.java
+/home/reece/IdeaProjects/guestbook-spring/src/main/java/com/reecesmith/guestbook/AuditConfig.java
+/home/reece/IdeaProjects/guestbook-spring/src/main/java/com/reecesmith/guestbook/Search.java
 /home/reece/IdeaProjects/guestbook-spring/src/main/java/com/reecesmith/guestbook/domain/GuestBookEntry.java
 /home/reece/IdeaProjects/guestbook-spring/src/main/java/com/reecesmith/guestbook/service/GuestBookService.java
 /home/reece/IdeaProjects/guestbook-spring/src/main/java/com/reecesmith/guestbook/GuestbookApplication.java

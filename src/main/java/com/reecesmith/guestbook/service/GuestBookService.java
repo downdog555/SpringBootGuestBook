@@ -5,11 +5,16 @@ import com.reecesmith.guestbook.domain.GuestBookEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class GuestBookService
 {
+
+   private String[] bannedWords = {"boi","lul"};
+
     @Autowired
     private GuestBookEntryRepository guestBookEntryRepository;
 
@@ -43,20 +48,20 @@ public class GuestBookService
             switch (com[i])
             {
                 case '{':
-                    com[i] = '*';
+                    com[i] = ' ';
                     break;
 
                 case '}':
-                    com[i] = '*';
+                    com[i] = ' ';
                     break;
                 case ';':
-                    com[i] = '*';
+                    com[i] = ' ';
                     break;
                 case '<':
-                    com[i] = '*';
+                    com[i] = ' ';
                     break;
                 case '>':
-                    com[i] = '*';
+                    com[i] = ' ';
                     break;
             }
         }
@@ -64,6 +69,20 @@ public class GuestBookService
 
 
          comment = String.copyValueOf(com);
+
+        //we then check for banned words/replace them
+
+        for (String word: bannedWords)
+        {
+           comment = comment.replaceAll(word, "****");
+
+        }
+
+
+
+
+
+
         newEntry.setComment(comment);
 
         this.guestBookEntryRepository.save(newEntry);
@@ -71,6 +90,27 @@ public class GuestBookService
 
     public GuestBookEntry findOne (Integer id) {
         return this.guestBookEntryRepository.findGuestBookEntryById(id);
+    }
+
+    public List<GuestBookEntry> search (String value)
+    {
+        //list to return
+        ArrayList<GuestBookEntry> foundValues = new ArrayList<GuestBookEntry>();
+        //all entries
+        List<GuestBookEntry> entries = this.guestBookEntryRepository.findAll();
+
+        for (GuestBookEntry entry: entries)
+        {
+            String comment = entry.getComment();
+            if(comment.contains(value))
+            {
+                foundValues.add(entry);
+            }
+        }
+
+
+
+        return foundValues;
     }
 
 }
